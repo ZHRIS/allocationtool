@@ -1,0 +1,93 @@
+/* 
+    Created on : Sep 17, 2015, 11:45:55 AM
+    Author     : tdhlakama
+*/
+.txt_header {
+    color: white;
+}
+
+#etable td label{
+    text-transform: uppercase;
+}
+
+#etable.capitalize {
+    text-transform: capitalize;
+}
+
+#emp_table .capitalize {
+    text-transform: capitalize;
+}
+
+#emp_table {
+    text-transform: capitalize;
+}
+
+
+.vs {
+    color: black;
+
+}
+
+.colbox {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+#submit_form {
+    padding: 10px;
+    border: 1px solid #000000;
+    cursor: pointer;
+}
+
+.m {
+    color: #d9534f;
+}
+
+th.title {
+    width: 100px;
+}
+th.action {
+    width: 40px;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+.spinner {
+    animation: spin 1s infinite linear;
+    width: 1em;
+    height: 1em;
+}
+.spinner.stop {
+    /* when this class is applied the animation will stop */
+    animation: none;
+}
+.circle {
+    border: solid 0.05em black;
+    width: 1em;
+    height: 1em;
+    border-radius: 1em;
+    border-left: none;
+    border-bottom: none;
+    border-right: none;
+}
+
+#loader-img{
+    margin: 0 auto;
+    display: block;
+}
+
+.form-horizontal .control-label {
+    text-align: left;
+}
+
+.list-group-item-heading{
+    text-decoration: underline;
+}
+
+.jbarDiv{
+    width:800px;
+    overflow-y: hidden;
+    overflow-x: visible;
+}

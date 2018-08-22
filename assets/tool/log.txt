@@ -1,0 +1,10 @@
+GLPSOL: GLPK LP/MIP Solver, v4.55
+Parameter(s) specified in the command line:
+ --mipgap 0.01 --tmlim 36000 -m Model.txt --log log.txt
+Reading model section from Model.txt...
+Model.txt:136: warning: final NL missing before end of file
+136 lines were read
+Reading set_g...
+csv_driver: unable to open general.csv - No such file or directory
+Model.txt:7: error on opening table set_g
+MathProg model processing error

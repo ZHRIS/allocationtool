@@ -1,0 +1,14 @@
+/.idea*
+/idea*
+*.iml
+/nbproject*
+*.csv
+*.bat
+*.log.txt
+*.logDB.txt
+!upload_template.csv
+!worker_type_template.csv
+!worker_level_template.csv
+!study_location_template.csv
+!demand_location_template.csv
+!worker_demand_template.csv

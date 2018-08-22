@@ -1,0 +1,7 @@
+[ODBC]
+Driver = MySQL ODBC 5.3 ANSI Driver 
+USER = hitrac
+PASSWORD = hitrac
+Server = localhost
+Database = allocationtool
+Port = 3306

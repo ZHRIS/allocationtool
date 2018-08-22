@@ -1,0 +1,154 @@
+
+##Declare parameters and set and read data form input files
+
+
+
+#Read general data such a global budget constraint
+set G;
+param GeneralSetting{g in G}, symbolic;
+table t IN
+  'ODBC' 'FILEDSN=.\workforce_allocation.dsn'
+  'general' :
+  G<-  [Setting], GeneralSetting ~ Value;
+
+
+
+#Read the locations and locations data
+set J;
+table t IN
+  'ODBC' 'FILEDSN=.\workforce_allocation.dsn'
+  'locations' :
+ J<-  [Location];
+
+param LocationBudget{j in J}, symbolic;
+table t IN
+  'ODBC' 'FILEDSN=.\workforce_allocation.dsn'
+  'locations' :
+  [Location], LocationBudget ~ Budget;
+
+param LocationPenalty{j in J};
+table t IN
+  'ODBC' 'FILEDSN=.\workforce_allocation.dsn'
+  'locations' :
+  [Location], LocationPenalty ~ Penalty;
+
+
+#Read the types of demand
+set T;
+table t IN
+  'ODBC' 'FILEDSN=.\workforce_allocation.dsn'
+  'types' :
+  T <- [Type];
+
+
+#Read the workers list and workers data
+set I;
+param Workers{i in I};
+table t IN
+  'ODBC' 'FILEDSN=.\workforce_allocation.dsn'
+  'workers' :
+ I<-  [Worker];
+
+param WorkerType{i in I}, symbolic;
+table t IN
+  'ODBC' 'FILEDSN=.\workforce_allocation.dsn'
+  'workers' :
+  [Worker], WorkerType ~ Type;
+
+param WorkerSalary{i in I};
+table t IN
+  'ODBC' 'FILEDSN=.\workforce_allocation.dsn'
+  'workers' :
+  [Worker], WorkerSalary ~ Salary;
+
+param WorkerFixedLoc{i in I}, symbolic;
+table t IN
+  'ODBC' 'FILEDSN=.\workforce_allocation.dsn'
+  'workers' :
+  [Worker], WorkerFixedLoc ~ FixedLocation;
+
+param WorkerFixed{i in I};
+table t IN
+  'ODBC' 'FILEDSN=.\workforce_allocation.dsn'
+  'workers' :
+  [Worker], WorkerFixed ~ Fixed;
+
+param WorkerOnlyPref{i in I};
+table t IN
+  'ODBC' 'FILEDSN=.\workforce_allocation.dsn'
+  'workers' :
+  [Worker], WorkerOnlyPref ~ OnlyPreferences;
+
+
+
+#Read demand data
+param Demand{j in J, t in T};
+table t IN
+  'ODBC' 'FILEDSN=.\workforce_allocation.dsn'
+  'demand' :
+  [Location,Type], Demand ~ Demand;
+
+
+
+#Read the list of preferences for the workers
+set Preference_set, dimen 2;
+
+param Weight{(i,j) in Preference_set};
+table t IN
+  'ODBC' 'FILEDSN=.\workforce_allocation.dsn'
+  'preferences' :
+Preference_set <-[Worker,Location], Weight ~ Weight;
+
+
+## Declare the decision variables. Only those variables that can be used are declared.
+var x{i in I, j in J: (WorkerFixed[i]<>0 and WorkerFixedLoc[i]=j) or (WorkerFixed[i]=0 and WorkerOnlyPref[i]<>0 and (i,j) in Preference_set) or (WorkerFixed[i]=0 and WorkerOnlyPref[i]=0)}, binary, >=0;
+
+var a{j in J, t in T}, >=0;
+
+
+
+## Declare the objective function
+maximize Z: sum{(i,j) in Preference_set: WorkerFixed[i]=0}(Weight[i,j]*x[i,j]) - (sum{j in J, t in T}(LocationPenalty[j]*(1-a[j,t])))
+;
+
+
+## Declare the model's constraints
+s.t. fixedlocation{i in I, j in J: (WorkerFixed[i]<>0 and WorkerFixedLoc[i]=j)}: x[i,j]=1;
+
+s.t. upperboundalpha{j in J, t in T}: a[j,t]<=1;
+
+s.t. onelocation{i in I}: sum{j in J: (WorkerFixed[i]<>0 and WorkerFixedLoc[i]=j) or (WorkerFixed[i]=0 and WorkerOnlyPref[i]<>0 and (i,j) in Preference_set) or (WorkerFixed[i]=0 and WorkerOnlyPref[i]=0)}x[i,j]<=1;
+
+s.t. budgetlimit{j in J: LocationBudget[j] <>'NA'}: sum{i in I: (WorkerFixed[i]<>0 and WorkerFixedLoc[i]=j) or (WorkerFixed[i]=0 and WorkerOnlyPref[i]<>0 and (i,j) in Preference_set) or (WorkerFixed[i]=0 and WorkerOnlyPref[i]=0)}x[i,j]*WorkerSalary[i]<=LocationBudget[j];
+
+s.t. totalbudgetlimit{g in G: g= 'totalbudget' and GeneralSetting['totalbudget'] <>'NA'}: sum{i in I, j in J: (WorkerFixed[i]<>0 and WorkerFixedLoc[i]=j) or (WorkerFixed[i]=0 and WorkerOnlyPref[i]<>0 and (i,j) in Preference_set) or (WorkerFixed[i]=0 and WorkerOnlyPref[i]=0)}x[i,j]*WorkerSalary[i]<=GeneralSetting['totalbudget'];
+
+s.t. limitdemand{j in J, t in T}: sum{i in I: (WorkerFixed[i]<>0 and WorkerFixedLoc[i]=j and WorkerType[i]=t) or (WorkerFixed[i]=0 and WorkerOnlyPref[i]<>0 and (i,j) in Preference_set and WorkerType[i]=t) or (WorkerFixed[i]=0 and WorkerOnlyPref[i]=0 and WorkerType[i]=t)}x[i,j]<=Demand[j,t];
+
+s.t. meetdemand{j in J, t in T}: sum{i in I: (WorkerFixed[i]<>0 and WorkerFixedLoc[i]=j and WorkerType[i]=t) or (WorkerFixed[i]=0 and WorkerOnlyPref[i]<>0 and (i,j) in Preference_set and WorkerType[i]=t) or (WorkerFixed[i]=0 and WorkerOnlyPref[i]=0 and WorkerType[i]=t)}x[i,j]>=a[j,t]*Demand[j,t];
+
+
+## Solve the model
+solve;
+
+#Create table with results of those workers assigned and their locations
+
+table t { i in I, j in J: ((WorkerFixed[i]<>0 and WorkerFixedLoc[i]=j) or (WorkerFixed[i]=0 and WorkerOnlyPref[i]<>0 and (i,j) in Preference_set) or (WorkerFixed[i]=0 and WorkerOnlyPref[i]=0)) and x[i,j]>0.5} OUT 
+  'ODBC'
+  'FileDSN=.\workforce_allocation.dsn;'
+  'DROP TABLE IF EXISTS results_x;'
+  'CREATE TABLE results_x ( Worker INT, Location VARCHAR(1000));'
+  'results_x' :
+  i ~ Worker, j ~ Location;
+
+
+
+end;
+
+
+
+
+
+
+
+

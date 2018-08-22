@@ -1,0 +1,12 @@
+GLPSOL: GLPK LP/MIP Solver, v4.57
+Parameter(s) specified in the command line:
+ --mipgap 0.01 --tmlim 21600 -m ModelDB.txt --log logDB.txt
+Reading model section from ModelDB.txt...
+154 lines were read
+Reading t...
+Failed to connect
+
+The driver reported the following diagnostics whilst running SQLDriverConnect
+HY000:1:556:General error: Invalid file dsn ''
+ModelDB.txt:9: error on opening table t
+MathProg model processing error
