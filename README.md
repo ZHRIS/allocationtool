@@ -9,4 +9,9 @@ In partnership with PHII and CDC, Health Informatics Training and Research Advan
 # Overview
 
 The objective of the Workforce Allocation Optimization Tool is to support the assignment of recent healthcare graduates, i.e., future healthcare workers (HCWs), based on the demand at different locations, the HCWs’ salaries and potential budget restrictions, and the HCWs’ location preferences for assignment, with the following goals: (i) to fulfill each location’s demand, as much as possible, and (ii) to maximize the HCWs’ satisfaction resulting from the assignments, thereby improving performance and retention. This repository contains the source code for the server-side component of the WAO, which is developed in PHP 5 using CodeIgniter framework. The database is MySQL and the server is Apache.
-# allocationtool
+
+# Allocationtool
+
+Application was developed with Php Version 5, MySql Version 5.7 and GLPK. 
+
+Point to note a blank database is provided in the sql folder
