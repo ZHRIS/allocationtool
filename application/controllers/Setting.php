@@ -281,10 +281,10 @@ class Setting extends Generic_input
 
         $id = $this->upload_model->save($this->session->userdata('identity'));
         foreach ($data['csv'] as $item) {
-            $valid = true;
+            $graduate_valid = true;
             $graduate_no = null;
             if ($this->graduate_model->check_duplicate(trim($item[0]))) {
-                $valid = false;
+                $graduate_valid = false;
                 $duplicate = 'Duplicate ID found';
             } else {
                 $graduate_no = $item[0];
@@ -292,7 +292,7 @@ class Setting extends Generic_input
 
             $location_id = null;
             if (!$this->location_model->check_duplicate(trim($item[3]))) {
-                $valid = false;
+                $graduate_valid = false;
                 $locationMissing = 'Study Location :not found';
             } else {
                 $location_id = $this->location_model->search(trim($item[3]))->location_id;
@@ -300,7 +300,7 @@ class Setting extends Generic_input
 
             $worker_type_id = null;
             if (!$this->worker_type_model->check_duplicate(trim($item[4]))) {
-                $valid = false;
+                $graduate_valid = false;
                 $workerTypeMissing = 'Worker Type :not found';
             } else {
                 $worker_type_id = $this->worker_type_model->search(trim($item[4]))->worker_type_id;
@@ -308,37 +308,39 @@ class Setting extends Generic_input
 
             $worker_level_id = null;
             if (!$this->worker_level_model->check_duplicate(trim($item[5]))) {
-                $valid = false;
+                $graduate_valid = false;
                 $workerLevelMissing = 'Worker Level :not found';
             } else {
                 $worker_level_id = $this->worker_level_model->search(trim($item[5]))->worker_level_id;
             }
 
+            $preference1_valid = true;
             $preference1 = null;
             if (!$this->demand_location_model->check_duplicate(trim($item[7]))) {
-                $valid = false;
+                $preference1_valid = false;
                 $preferenceMissing = "Preference :not found";
             } else {
                 $preference1 = $this->demand_location_model->search(trim($item[7]))->demand_location_id;
             }
 
+            $preference2_valid = true;
             $preference2 = null;
             if (!$this->demand_location_model->check_duplicate(trim($item[8]))) {
-                $valid = false;
+                $preference2_valid = false;
                 $preferenceMissing = "Preference :not found";
             } else {
                 $preference2 = $this->demand_location_model->search(trim($item[8]))->demand_location_id;
             }
 
-            $preference3 = null;
+            $preference3_valid = null;
             if (!$this->demand_location_model->check_duplicate(trim($item[9]))) {
-                $valid = false;
+                $preference3_valid = false;
                 $preferenceMissing = "Preference :not found";
             } else {
                 $preference3 = $this->demand_location_model->search(trim($item[9]))->demand_location_id;
             }
 
-            if ($valid) {
+            if ($graduate_valid) {
 
 
                 /* use this to break full name into first name and last name
@@ -353,9 +355,16 @@ class Setting extends Generic_input
                     trim($item[2]), //$last_name
                     $location_id, $worker_type_id, $worker_level_id, trim($item[6]), $id
                 );
-                $this->preference_model->save($graduate_id, $preference1);
-                $this->preference_model->save($graduate_id, $preference2);
-                $this->preference_model->save($graduate_id, $preference3);
+
+                if ($preference1_valid) {
+                    $this->preference_model->save($graduate_id, $preference1);
+                }
+                if ($preference2_valid) {
+                    $this->preference_model->save($graduate_id, $preference2);
+                }
+                if ($preference3_valid) {
+                    $this->preference_model->save($graduate_id, $preference3);
+                }
                 $count++;
             } else {
                 $errors++;

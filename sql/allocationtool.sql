@@ -1,10 +1,10 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2
--- http://www.phpmyadmin.net
+-- version 4.6.6deb5
+-- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 22, 2018 at 05:03 AM
--- Server version: 5.7.22-0ubuntu0.16.04.1
+-- Generation Time: Oct 16, 2018 at 05:51 AM
+-- Server version: 5.7.23-0ubuntu0.18.04.1
 -- PHP Version: 7.0.30-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -78,7 +78,7 @@ CREATE TABLE `general` (
 --
 
 CREATE TABLE `graduate` (
-  `graduate_id` int(4) NOT NULL,
+  `graduate_id` int(5) NOT NULL,
   `graduate_no` int(6) DEFAULT NULL,
   `first_name` varchar(800) DEFAULT NULL,
   `location_id` int(4) DEFAULT NULL,
@@ -120,7 +120,7 @@ INSERT INTO `groups` (`id`, `name`, `description`) VALUES
 --
 
 CREATE TABLE `location` (
-  `location_id` int(2) NOT NULL,
+  `location_id` int(4) NOT NULL,
   `location_name` varchar(255) DEFAULT NULL,
   `longitude_coordinate` varchar(10) DEFAULT NULL,
   `latitude_coordinate` varchar(10) DEFAULT NULL
@@ -335,7 +335,7 @@ CREATE TABLE `worker_demand` (
 
 CREATE TABLE `worker_level` (
   `worker_level_name` varchar(255) DEFAULT NULL,
-  `worker_level_id` int(1) NOT NULL,
+  `worker_level_id` int(4) NOT NULL,
   `worker_level_description` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -359,8 +359,8 @@ CREATE TABLE `worker_salary` (
 --
 
 CREATE TABLE `worker_type` (
-  `worker_type_name` varchar(255) DEFAULT NULL,
-  `worker_type_id` int(2) NOT NULL
+  `worker_type_id` int(10) NOT NULL,
+  `worker_type_name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -462,6 +462,7 @@ ALTER TABLE `worker_demand`
 -- Indexes for table `worker_level`
 --
 ALTER TABLE `worker_level`
+  ADD PRIMARY KEY (`worker_level_id`),
   ADD UNIQUE KEY `worker_level_id` (`worker_level_id`),
   ADD UNIQUE KEY `worker_level_name` (`worker_level_name`);
 
@@ -476,6 +477,7 @@ ALTER TABLE `worker_salary`
 -- Indexes for table `worker_type`
 --
 ALTER TABLE `worker_type`
+  ADD PRIMARY KEY (`worker_type_id`),
   ADD KEY `worker_type_id` (`worker_type_id`);
 
 --
@@ -496,7 +498,7 @@ ALTER TABLE `distance`
 -- AUTO_INCREMENT for table `graduate`
 --
 ALTER TABLE `graduate`
-  MODIFY `graduate_id` int(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `graduate_id` int(5) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `groups`
 --
@@ -506,7 +508,7 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT for table `location`
 --
 ALTER TABLE `location`
-  MODIFY `location_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `location_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `login_attempts`
 --
@@ -546,7 +548,7 @@ ALTER TABLE `worker_demand`
 -- AUTO_INCREMENT for table `worker_level`
 --
 ALTER TABLE `worker_level`
-  MODIFY `worker_level_id` int(1) NOT NULL AUTO_INCREMENT;
+  MODIFY `worker_level_id` int(4) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `worker_salary`
 --
@@ -556,7 +558,7 @@ ALTER TABLE `worker_salary`
 -- AUTO_INCREMENT for table `worker_type`
 --
 ALTER TABLE `worker_type`
-  MODIFY `worker_type_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `worker_type_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- Constraints for dumped tables
 --
