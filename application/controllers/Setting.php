@@ -332,7 +332,8 @@ class Setting extends Generic_input
                 $preference2 = $this->demand_location_model->search(trim($item[8]))->demand_location_id;
             }
 
-            $preference3_valid = null;
+            $preference3_valid = true;
+            $preference3 = null;
             if (!$this->demand_location_model->check_duplicate(trim($item[9]))) {
                 $preference3_valid = false;
                 $preferenceMissing = "Preference :not found";
