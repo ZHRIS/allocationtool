@@ -139,7 +139,7 @@ class Setting extends Generic_input
         array_push($_id, 'worker_type');
         array_push($_name, 'Worker Type');
         array_push($_id, 'worker_level');
-        array_push($_name, 'Work Lever');
+        array_push($_name, 'Work Level');
         array_push($_id, 'demand_location');
         array_push($_name, 'Demand Location');
         array_push($_id, 'worker_demand');

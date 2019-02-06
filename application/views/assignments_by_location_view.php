@@ -8,8 +8,8 @@
 <?php $total_demand_location_budget = 0 ?>
 <?php $total_allocation_budget = $this->setting_model->get_total_demand_locations_budget() ;?>
 <div class="row">
+    <caption><h4> Assignments by Location </h4></caption>
     <table id="etable" class="table table-striped table-hover">
-        <caption><h4>Assignments by Location</h4></caption>
         <thead>
         <tr>
             <th> Demand Location</th>

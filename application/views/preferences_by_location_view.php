@@ -4,9 +4,10 @@
 <?php $total_number_of_times_selected = 0 ?>
 <?php $total_top_choice = 0 ?>
 <?php $total_top_selection = 0 ?>
+
 <div class="row">
+    <caption><h4> Preferences by Location </h4></caption>
     <table id="etable" class="table table-striped table-hover">
-        <caption><h4>Preferences by Location</h4></caption>
         <thead>
         <tr>
             <th>Demand Location</th>

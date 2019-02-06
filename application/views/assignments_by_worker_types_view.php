@@ -5,8 +5,8 @@
 <?php $total_number_of_workers = 0; ?>
 <?php $total_number_of_workers_assigned = 0; ?>
 <div class="row">
+    <caption><h4> Assignments by Worker Types </h4></caption>
     <table id="etable" class="table table-striped table-hover">
-        <caption><h4>Assignments by Worker Types</h4></caption>
         <thead>
         <tr>
             <th> Worker Type</th>
