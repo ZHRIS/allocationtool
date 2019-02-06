@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 16, 2018 at 05:51 AM
--- Server version: 5.7.23-0ubuntu0.18.04.1
+-- Generation Time: Feb 06, 2019 at 09:36 AM
+-- Server version: 5.7.25-0ubuntu0.18.04.2
 -- PHP Version: 7.0.30-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -78,7 +78,7 @@ CREATE TABLE `general` (
 --
 
 CREATE TABLE `graduate` (
-  `graduate_id` int(5) NOT NULL,
+  `graduate_id` int(4) NOT NULL,
   `graduate_no` int(6) DEFAULT NULL,
   `first_name` varchar(800) DEFAULT NULL,
   `location_id` int(4) DEFAULT NULL,
@@ -150,13 +150,6 @@ CREATE TABLE `login_attempts` (
   `login` varchar(100) NOT NULL,
   `time` int(11) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `login_attempts`
---
-
-INSERT INTO `login_attempts` (`id`, `ip_address`, `login`, `time`) VALUES
-(11, '::1', 'hitrac', 1534906797);
 
 -- --------------------------------------------------------
 
@@ -277,7 +270,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2y$08$s/eK7480mVPONJ3wISVYKOu0b7fjDm30yV1IrRzY7QgGia35Xm9RC', '', 'administrator', '', NULL, NULL, NULL, 1268889823, 1534906815, 1, 'Admin', 'istrator', 'ADMIN', '0');
+(1, '127.0.0.1', 'administrator', '$2y$08$s/eK7480mVPONJ3wISVYKOu0b7fjDm30yV1IrRzY7QgGia35Xm9RC', '', 'administrator', '', NULL, NULL, NULL, 1268889823, 1549436889, 1, 'Admin', 'istrator', 'ADMIN', '0');
 
 -- --------------------------------------------------------
 
@@ -335,7 +328,7 @@ CREATE TABLE `worker_demand` (
 
 CREATE TABLE `worker_level` (
   `worker_level_name` varchar(255) DEFAULT NULL,
-  `worker_level_id` int(4) NOT NULL,
+  `worker_level_id` int(1) NOT NULL,
   `worker_level_description` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -359,7 +352,7 @@ CREATE TABLE `worker_salary` (
 --
 
 CREATE TABLE `worker_type` (
-  `worker_type_id` int(10) NOT NULL,
+  `worker_type_id` int(4) NOT NULL,
   `worker_type_name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -462,7 +455,6 @@ ALTER TABLE `worker_demand`
 -- Indexes for table `worker_level`
 --
 ALTER TABLE `worker_level`
-  ADD PRIMARY KEY (`worker_level_id`),
   ADD UNIQUE KEY `worker_level_id` (`worker_level_id`),
   ADD UNIQUE KEY `worker_level_name` (`worker_level_name`);
 
@@ -477,8 +469,8 @@ ALTER TABLE `worker_salary`
 -- Indexes for table `worker_type`
 --
 ALTER TABLE `worker_type`
-  ADD PRIMARY KEY (`worker_type_id`),
-  ADD KEY `worker_type_id` (`worker_type_id`);
+  ADD KEY `worker_type_id` (`worker_type_id`),
+  ADD KEY `worker_type_id_2` (`worker_type_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -493,12 +485,12 @@ ALTER TABLE `demand_location`
 -- AUTO_INCREMENT for table `distance`
 --
 ALTER TABLE `distance`
-  MODIFY `distance_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `distance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `graduate`
 --
 ALTER TABLE `graduate`
-  MODIFY `graduate_id` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `graduate_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2709;
 --
 -- AUTO_INCREMENT for table `groups`
 --
@@ -508,17 +500,17 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT for table `location`
 --
 ALTER TABLE `location`
-  MODIFY `location_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `location_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `login_attempts`
 --
 ALTER TABLE `login_attempts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `preference`
 --
 ALTER TABLE `preference`
-  MODIFY `preference_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `preference_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16016;
 --
 -- AUTO_INCREMENT for table `setting`
 --
@@ -528,37 +520,37 @@ ALTER TABLE `setting`
 -- AUTO_INCREMENT for table `upload`
 --
 ALTER TABLE `upload`
-  MODIFY `upload_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `upload_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `users_groups`
 --
 ALTER TABLE `users_groups`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `worker_demand`
 --
 ALTER TABLE `worker_demand`
-  MODIFY `worker_demand_id` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `worker_demand_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1496;
 --
 -- AUTO_INCREMENT for table `worker_level`
 --
 ALTER TABLE `worker_level`
-  MODIFY `worker_level_id` int(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `worker_level_id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 --
 -- AUTO_INCREMENT for table `worker_salary`
 --
 ALTER TABLE `worker_salary`
-  MODIFY `worker_salary_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `worker_salary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `worker_type`
 --
 ALTER TABLE `worker_type`
-  MODIFY `worker_type_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `worker_type_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- Constraints for dumped tables
 --
