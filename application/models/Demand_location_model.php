@@ -135,7 +135,7 @@ class Demand_location_model extends CI_Model {
 
     function search($q) {
         $this->db->from('demand_location');
-        $this->db->like('demand_location_name', $q);
+        $this->db->where('demand_location_name', $q);
         $query = $this->db->get();
         return $query->row();
     }

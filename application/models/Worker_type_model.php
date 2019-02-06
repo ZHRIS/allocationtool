@@ -73,7 +73,7 @@ class Worker_type_model extends CI_Model
     function search($q)
     {
         $this->db->from('worker_type');
-        $this->db->like('worker_type_name', $q);
+        $this->db->where('worker_type_name', $q);
         $query = $this->db->get();
         return $query->row();
     }
