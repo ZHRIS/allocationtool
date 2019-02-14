@@ -115,17 +115,18 @@ class User extends Generic_input
                     'company' => $this->input->post('company'),
                     'phone' => $this->input->post('phone'),
                 );
-            }
 
-        if ($this->form_validation->run() === TRUE && $this->ion_auth->register($identity, $password, $email, $additional_data) === FALSE) {
-            $this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">' . $this->ion_auth->errors() . '</div>');
-            redirect("user/listAll");
-        }
-        
-        if ($this->form_validation->run() === TRUE && $this->ion_auth->register($identity, $password, $email, $additional_data)) {
-            $this->session->set_flashdata('msg', '<div class="alert alert-success text-center">' . $this->ion_auth->messages() . '</div>');
-            redirect("user/listAll");
-        }
+                if ($this->ion_auth->check_duplicate($identity) === True) {
+                    $this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">' . "Duplicate User name" . '</div>');
+                    $this->load->view('create_user', $this->data);
+                    $this->load->view('footer');
+                } else {
+
+                    $this->ion_auth->register($identity, $password, $email, $additional_data);
+                    $this->session->set_flashdata('msg', '<div class="alert alert-success text-center">' . $this->ion_auth->messages() . '</div>');
+                    redirect('user/listAll');
+                }
+            }
 
     }
 

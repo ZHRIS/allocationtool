@@ -795,6 +795,17 @@ class Ion_auth_model extends CI_Model
 						->count_all_results($this->tables['users']) > 0;
 	}
 
+    function check_duplicate($identity) {
+        $this->db->from('users');
+        $this->db->where('username', $identity);
+        $query = $this->db->get();
+        if ($query->num_rows() == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 	/**
 	 * Insert a forgotten password key.
 	 *

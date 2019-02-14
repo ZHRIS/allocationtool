@@ -158,7 +158,6 @@
             </div>
         </fieldset>
         <?php echo form_close(); ?>
-        <?php echo $this->session->flashdata('msg'); ?>
 
     </div>
 </div>
