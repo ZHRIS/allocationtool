@@ -53,7 +53,7 @@
             <th title="% Assigned vs. Total Num. of Workers"> <?php echo get_percentage($total_allocated_workers, $total_number_of_workers) . '%'; ?></th>
             <th title="Workers Assigned to Top Preferences"> <?php echo $total_workers_assigned_to_top_preference; ?></th>
             <th title="% Workers Assigned to Top Preferences"> <?php echo get_percentage($total_allocated_workers,
-                    $total_workers_assigned_to_top_preference); ?>
+                    $total_workers_assigned_to_top_preference) . ' %'; ?>
             </th>
             <th title="Workers Assigned to Top 3 Preferences"> <?php echo $total_workers_assigned_to_top_three_preference; ?>
             </th>

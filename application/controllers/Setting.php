@@ -277,7 +277,8 @@ class Setting extends Generic_input
         $locationMissing = '';
         $workerTypeMissing = '';
         $workerLevelMissing = '';
-        $preferenceMissing = '';
+
+        $numberOfPreferenceAllowed = $this->setting_model->get_number_of_preferences_allowed();
 
         $id = $this->upload_model->save($this->session->userdata('identity'));
         foreach ($data['csv'] as $item) {
@@ -314,32 +315,6 @@ class Setting extends Generic_input
                 $worker_level_id = $this->worker_level_model->search(trim($item[5]))->worker_level_id;
             }
 
-            $preference1_valid = true;
-            $preference1 = null;
-            if (!$this->demand_location_model->check_duplicate(trim($item[7]))) {
-                $preference1_valid = false;
-                $preferenceMissing = "Preference :not found";
-            } else {
-                $preference1 = $this->demand_location_model->search(trim($item[7]))->demand_location_id;
-            }
-
-            $preference2_valid = true;
-            $preference2 = null;
-            if (!$this->demand_location_model->check_duplicate(trim($item[8]))) {
-                $preference2_valid = false;
-                $preferenceMissing = "Preference :not found";
-            } else {
-                $preference2 = $this->demand_location_model->search(trim($item[8]))->demand_location_id;
-            }
-
-            $preference3_valid = true;
-            $preference3 = null;
-            if (!$this->demand_location_model->check_duplicate(trim($item[9]))) {
-                $preference3_valid = false;
-                $preferenceMissing = "Preference :not found";
-            } else {
-                $preference3 = $this->demand_location_model->search(trim($item[9]))->demand_location_id;
-            }
 
             if ($graduate_valid) {
 
@@ -357,15 +332,25 @@ class Setting extends Generic_input
                     $location_id, $worker_type_id, $worker_level_id, trim($item[6]), $id
                 );
 
-                if ($preference1_valid) {
-                    $this->preference_model->save($graduate_id, $preference1);
+
+                $preference_start = 7;
+
+                for ($i = 0; $i < $numberOfPreferenceAllowed; $i++) {
+                    $preference_valid = true;
+                    $preference = null;
+                    if (!$this->demand_location_model->check_duplicate(trim($item[$preference_start]))) {
+                        $preference_valid = false;
+                    } else {
+                        $preference = $this->demand_location_model->search(trim($item[$preference_start]))->demand_location_id;
+                    }
+
+                    if ($preference_valid) {
+                        $this->preference_model->save($graduate_id, $preference);
+                    }
+
+                    $preference_start++;
                 }
-                if ($preference2_valid) {
-                    $this->preference_model->save($graduate_id, $preference2);
-                }
-                if ($preference3_valid) {
-                    $this->preference_model->save($graduate_id, $preference3);
-                }
+
                 $count++;
             } else {
                 $errors++;

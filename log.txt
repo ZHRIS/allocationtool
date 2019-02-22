@@ -1,4 +1,4 @@
-GLPSOL: GLPK LP/MIP Solver, v4.57
+GLPSOL: GLPK LP/MIP Solver, v4.65
 Parameter(s) specified in the command line:
  --mipgap 0.1 --tmlim 10 -m Model.txt --log log.txt
 Reading model section from Model.txt...
@@ -27,35 +27,32 @@ Generating totalbudgetlimit...
 Generating limitdemand...
 Generating meetdemand...
 Model has been successfully generated
-glp_mpl_build_prob: row Z; constant term -10800 ignored
-GLPK Integer Optimizer, v4.57
-3440 rows, 118575 columns, 358122 non-zeros
-118305 integer variables, all of which are binary
+glp_mpl_build_prob: row Z; constant term -4400 ignored
+GLPK Integer Optimizer, v4.65
+525 rows, 2050 columns, 6298 non-zeros
+1940 integer variables, all of which are binary
 Preprocessing...
-2705 rows, 32169 columns, 96431 non-zeros
-32131 integer variables, all of which are binary
+221 rows, 1693 columns, 4971 non-zeros
+1667 integer variables, all of which are binary
 Scaling...
- A: min|aij| =  1.000e+00  max|aij| =  9.600e+01  ratio =  9.600e+01
+ A: min|aij| =  1.000e+00  max|aij| =  1.070e+02  ratio =  1.070e+02
 GM: min|aij| =  1.000e+00  max|aij| =  1.000e+00  ratio =  1.000e+00
 EQ: min|aij| =  1.000e+00  max|aij| =  1.000e+00  ratio =  1.000e+00
-2N: min|aij| =  6.719e-01  max|aij| =  1.313e+00  ratio =  1.953e+00
+2N: min|aij| =  6.875e-01  max|aij| =  1.312e+00  ratio =  1.909e+00
 Constructing initial basis...
-Size of triangular part is 2705
+Size of triangular part is 221
 Solving LP relaxation...
-GLPK Simplex Optimizer, v4.57
-2705 rows, 32169 columns, 96431 non-zeros
-*     0: obj =  -1.520000000e+03 inf =   0.000e+00 (38)
-*   500: obj =  -9.531034483e+02 inf =   7.250e-14 (8724)
-*  1000: obj =  -6.273684211e+02 inf =   1.468e-13 (734)
-*  1500: obj =  -4.326826219e+02 inf =   2.341e-13 (16439)
-*  2000: obj =  -2.500102815e+02 inf =   4.895e-13 (2838)
-*  2465: obj =  -1.748102815e+02 inf =   0.000e+00 (0)
+GLPK Simplex Optimizer, v4.65
+221 rows, 1693 columns, 4971 non-zeros
+*     0: obj =  -1.240000000e+03 inf =   0.000e+00 (252)
+*   563: obj =   1.901146273e+02 inf =   0.000e+00 (0)
 OPTIMAL LP SOLUTION FOUND
 Integer optimization begins...
-+  2465: mip =     not found yet <=              +inf        (1; 0)
-+  2465: >>>>>  -1.748102815e+02 <=  -1.748102815e+02   0.0% (1; 0)
-+  2465: mip =  -1.748102815e+02 <=     tree is empty   0.0% (0; 1)
+Long-step dual simplex will be used
++   563: mip =     not found yet <=              +inf        (1; 0)
++   563: >>>>>   1.901146273e+02 <=   1.901146273e+02   0.0% (1; 0)
++   563: mip =   1.901146273e+02 <=     tree is empty   0.0% (0; 1)
 INTEGER OPTIMAL SOLUTION FOUND
-Time used:   1.4 secs
-Memory used: 87.7 Mb (91957142 bytes)
+Time used:   0.0 secs
+Memory used: 3.3 Mb (3430077 bytes)
 Model has been successfully processed

@@ -17,13 +17,19 @@
             <th>Worker Type</th>
             <th>Worker Level</th>
             <th>Gender</th>
-            <th>Preference 1</th>
-            <th>Preference 2</th>
-            <th>Preference 3</th>
+            <?php
+            $numberOfPreferenceAllowed = $this->setting_model->get_number_of_preferences_allowed();
+            for ($i = 0; $i < $numberOfPreferenceAllowed; $i++) {
+                $key = $i + 1;
+                echo '<th> Preference ' . $key . ' </th>';
+            }
+            ?>
         </tr>
         </thead>
         <tbody>
         <?php
+        $numberOfPreferenceAllowed = $this->setting_model->get_number_of_preferences_allowed();
+
         foreach ($csv as $i => $item) {
             echo '<tr>';
             echo '<td> ' . ($this->graduate_model->check_duplicate(trim($item[0])) ? '<label class="m">' . $item[0] . "</label>" : $item[0]) . ' </td>';
@@ -33,9 +39,11 @@
             echo '<td> ' . (!$this->worker_type_model->check_duplicate(trim($item[4])) ? '<label class="m">' . $item[4] . "</label>" : $item[4]) . ' </td>';
             echo '<td> ' . (!$this->worker_level_model->check_duplicate(trim($item[5])) ? '<label class="m">' . $item[5] . "</label>" : $item[5]) . ' </td>';
             echo '<td> ' . trim($item[6]) . ' </td>';
-            echo '<td> ' . (!$this->demand_location_model->check_duplicate(trim($item[7])) ? '<label class="m">' . $item[7] . "</label>" : $item[7]) . ' </td>';
-            echo '<td> ' . (!$this->demand_location_model->check_duplicate(trim($item[8])) ? '<label class="m">' . $item[8] . "</label>" : $item[8]) . ' </td>';
-            echo '<td> ' . (!$this->demand_location_model->check_duplicate(trim($item[9])) ? '<label class="m">' . $item[9] . "</label>" : $item[9]) . ' </td>';
+            $preference_start = 7;
+            for ($i = 0; $i < $numberOfPreferenceAllowed; $i++) {
+                echo '<td> ' . (!$this->demand_location_model->check_duplicate(trim($item[$preference_start])) ? '<label class="m">' . $item[$preference_start] . "</label>" : $item[$preference_start]) . ' </td>';
+                $preference_start++;
+            }
             echo '</tr>';
         }
         ?>
