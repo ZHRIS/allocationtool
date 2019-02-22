@@ -28,8 +28,6 @@ class User extends Generic_input
     function create_user()
     {
 
-        // validate form input
-        $this->form_validation->set_rules('username', 'Username', 'required');
         $this->form_validation->set_rules('first_name', 'First name', 'required');
         $this->form_validation->set_rules('last_name', 'Last name', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
@@ -107,7 +105,7 @@ class User extends Generic_input
             if ($this->form_validation->run() === TRUE) {
                 $email = strtolower($this->input->post('email'));
                 $password = $this->input->post('password');
-                $identity = $this->input->post('username');
+                $identity = $email;
 
                 $additional_data = array(
                     'first_name' => $this->input->post('first_name'),

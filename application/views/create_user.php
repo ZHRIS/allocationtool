@@ -14,12 +14,12 @@
             <div class="form-group">
                 <div class="row colbox">
                     <div class="col-lg-4 col-sm-4">
-                        <label for="username" class="control-label m">Username *</label>
+                        <label for="email" class="control-label m">Email *</label>
                     </div>
                     <div class="col-lg-8 col-sm-8">
-                        <input id="username" name="username" placeholder="username" type="text" class="form-control"
-                               value="<?php echo set_value('username'); ?>"/>
-                        <span class="text-danger"><?php echo form_error('username'); ?></span>
+                        <input id="email" name="email" placeholder="email" type="text" class="form-control"
+                               value="<?php echo set_value('email'); ?>"/>
+                        <span class="text-danger"><?php echo form_error('email'); ?></span>
                     </div>
                 </div>
             </div>
@@ -46,19 +46,6 @@
                         <input id="last_name" name="last_name" placeholder="last name" type="text" class="form-control"
                                value="<?php echo set_value('last_name'); ?>"/>
                         <span class="text-danger"><?php echo form_error('last_name'); ?></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="row colbox">
-                    <div class="col-lg-4 col-sm-4">
-                        <label for="email" class="control-label m">Email *</label>
-                    </div>
-                    <div class="col-lg-8 col-sm-8">
-                        <input id="email" name="email" placeholder="email" type="text" class="form-control"
-                               value="<?php echo set_value('email'); ?>"/>
-                        <span class="text-danger"><?php echo form_error('email'); ?></span>
                     </div>
                 </div>
             </div>

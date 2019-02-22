@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 06, 2019 at 09:36 AM
+-- Generation Time: Feb 22, 2019 at 08:06 PM
 -- Server version: 5.7.25-0ubuntu0.18.04.2
 -- PHP Version: 7.0.30-0ubuntu0.16.04.1
 
@@ -151,6 +151,19 @@ CREATE TABLE `login_attempts` (
   `time` int(11) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `login_attempts`
+--
+
+INSERT INTO `login_attempts` (`id`, `ip_address`, `login`, `time`) VALUES
+(2, '::1', 'dhlakama', 1550852968),
+(3, '::1', 'dhlakama', 1550853037),
+(6, '::1', 'dhlakama', 1550857177),
+(7, '::1', 'tdhlakama', 1550857489),
+(8, '::1', 'tdhlakama', 1550857498),
+(9, '::1', 'tdhlakama', 1550857625),
+(14, '::1', 'admin', 1550858031);
+
 -- --------------------------------------------------------
 
 --
@@ -212,7 +225,7 @@ CREATE TABLE `setting` (
 --
 
 INSERT INTO `setting` (`setting_id`, `maximum_running_time`, `optimality_gap`, `harvesine_formula`, `maximum_weight`, `total_budget`, `default_penalty_unfulfilled_demand`, `number_of_preferences_allowed`, `date_modified`, `errors_found`, `tool_currency`, `platform`) VALUES
-(100, 10, 0.1, 1, 3, 0, 40, 3, '2018-05-31', 0, 'ZMK', 'Linux');
+(100, 10, 0.1, 1, 3, 0, 40, 3, '2019-02-22', 0, 'ZMK', 'Linux');
 
 -- --------------------------------------------------------
 
@@ -248,7 +261,6 @@ CREATE TABLE `upload` (
 CREATE TABLE `users` (
   `id` int(11) UNSIGNED NOT NULL,
   `ip_address` varchar(45) NOT NULL,
-  `username` varchar(100) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `salt` varchar(255) DEFAULT NULL,
   `email` varchar(254) NOT NULL,
@@ -269,8 +281,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2y$08$s/eK7480mVPONJ3wISVYKOu0b7fjDm30yV1IrRzY7QgGia35Xm9RC', '', 'administrator', '', NULL, NULL, NULL, 1268889823, 1549436889, 1, 'Admin', 'istrator', 'ADMIN', '0');
+INSERT INTO `users` (`id`, `ip_address`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
+(1, '127.0.0.1', '$2y$08$N9cCrG13.StuIyftC2Gsu.dUUanrwrho2XBtw73jP9xhHGFjcerJ.', '', 'administrator', '', NULL, NULL, NULL, 1268889823, 1550858578, 1, 'Admin', 'istrator', 'ADMIN', '0'),
+(12, '::1', '$2y$08$zLnuBvYIXQumZdlrbfKieuXjV4krA1e8tb7oEDTwPyNagaTsR6ZRu', NULL, 'tdhlakama@gmail.com', NULL, NULL, NULL, NULL, 1550857433, 1550858046, 1, 'Takunda L', 'Dhlakama', 'tdhlakama', '773053726'),
+(13, '::1', '$2y$08$zXbodlXWSslF/K0S8LrHIel7m7smW07bkt0WZDoVrmrUJ0gBzrrF6', NULL, 'fwamambo@gmail.com', NULL, NULL, NULL, NULL, 1550858443, 1550858537, 1, 'Takunda L', 'Dhlakama', 'tdhlakama', '773203783');
 
 -- --------------------------------------------------------
 
@@ -290,7 +304,9 @@ CREATE TABLE `users_groups` (
 
 INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (1, 1, 1),
-(2, 1, 2);
+(2, 1, 2),
+(13, 12, 1),
+(14, 13, 2);
 
 -- --------------------------------------------------------
 
@@ -427,7 +443,8 @@ ALTER TABLE `upload`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `users_groups`
@@ -480,17 +497,17 @@ ALTER TABLE `worker_type`
 -- AUTO_INCREMENT for table `demand_location`
 --
 ALTER TABLE `demand_location`
-  MODIFY `demand_location_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=393;
+  MODIFY `demand_location_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=435;
 --
 -- AUTO_INCREMENT for table `distance`
 --
 ALTER TABLE `distance`
-  MODIFY `distance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `distance_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `graduate`
 --
 ALTER TABLE `graduate`
-  MODIFY `graduate_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2709;
+  MODIFY `graduate_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=583;
 --
 -- AUTO_INCREMENT for table `groups`
 --
@@ -505,12 +522,12 @@ ALTER TABLE `location`
 -- AUTO_INCREMENT for table `login_attempts`
 --
 ALTER TABLE `login_attempts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `preference`
 --
 ALTER TABLE `preference`
-  MODIFY `preference_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16016;
+  MODIFY `preference_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=868;
 --
 -- AUTO_INCREMENT for table `setting`
 --
@@ -520,37 +537,37 @@ ALTER TABLE `setting`
 -- AUTO_INCREMENT for table `upload`
 --
 ALTER TABLE `upload`
-  MODIFY `upload_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `upload_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `users_groups`
 --
 ALTER TABLE `users_groups`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `worker_demand`
 --
 ALTER TABLE `worker_demand`
-  MODIFY `worker_demand_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1496;
+  MODIFY `worker_demand_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1725;
 --
 -- AUTO_INCREMENT for table `worker_level`
 --
 ALTER TABLE `worker_level`
-  MODIFY `worker_level_id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `worker_level_id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `worker_salary`
 --
 ALTER TABLE `worker_salary`
-  MODIFY `worker_salary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `worker_salary_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `worker_type`
 --
 ALTER TABLE `worker_type`
-  MODIFY `worker_type_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `worker_type_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 --
 -- Constraints for dumped tables
 --

@@ -797,7 +797,7 @@ class Ion_auth_model extends CI_Model
 
     function check_duplicate($identity) {
         $this->db->from('users');
-        $this->db->where('username', $identity);
+        $this->db->where('email', $identity);
         $query = $this->db->get();
         if ($query->num_rows() == 0) {
             return false;
@@ -977,7 +977,6 @@ class Ion_auth_model extends CI_Model
 		// Users table.
 		$data = array(
 			$this->identity_column => $identity,
-			'username' => $identity,
 			'password' => $password,
 			'email' => $email,
 			'ip_address' => $ip_address,
