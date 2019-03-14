@@ -13,11 +13,11 @@
             <div class="form-group">
                 <div class="row colbox">
                     <div class="col-lg-4 col-sm-4">
-                        <label for="username" class="control-label">Username</label>
+                        <label for="email" class="control-label m">Email *</label>
                     </div>
                     <div class="col-lg-8 col-sm-8">
-                        <input id="username" name="username" placeholder="username" type="text" class="form-control"  value="<?php echo $emp->username; ?>" />
-                        <span class="text-danger"><?php echo form_error('username'); ?></span>
+                        <input id="email" name="email" placeholder="Email as Username" type="text" class="form-control" value="<?php echo $emp->email; ?>" />
+                        <span class="text-danger"><?php echo form_error('email'); ?></span>
                     </div>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                         <label for="first_name" class="control-label">First name</label>
                     </div>
                     <div class="col-lg-8 col-sm-8">
-                        <input id="first_name" name="first_name" placeholder="first_name" type="text" class="form-control"  value="<?php echo $emp->first_name; ?>" />
+                        <input id="first_name" name="first_name" placeholder="First_name" type="text" class="form-control"  value="<?php echo $emp->first_name; ?>" />
                         <span class="text-danger"><?php echo form_error('first_name'); ?></span>
                     </div>
                 </div>
@@ -40,20 +40,8 @@
                         <label for="last_name" class="control-label">Last name</label>
                     </div>
                     <div class="col-lg-8 col-sm-8">
-                        <input id="last_name" name="last_name" placeholder="last_name" type="text" class="form-control"  value="<?php echo $emp->last_name; ?>" />
+                        <input id="last_name" name="last_name" placeholder="Last_name" type="text" class="form-control"  value="<?php echo $emp->last_name; ?>" />
                         <span class="text-danger"><?php echo form_error('last_name'); ?></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="row colbox">
-                    <div class="col-lg-4 col-sm-4">
-                        <label for="email" class="control-label">Email</label>
-                    </div>
-                    <div class="col-lg-8 col-sm-8">
-                        <input id="email" name="email" placeholder="email" type="text" class="form-control" value="<?php echo $emp->email; ?>" />
-                        <span class="text-danger"><?php echo form_error('email'); ?></span>
                     </div>
                 </div>
             </div>
@@ -64,7 +52,7 @@
                         <label for="phone" class="control-label">Phone Number</label>
                     </div>
                     <div class="col-lg-8 col-sm-8">
-                        <input id="phone" name="phone" placeholder="phone" type="text" class="form-control" value="<?php echo $emp->phone; ?>" />
+                        <input id="phone" name="phone" placeholder="Phone" type="text" class="form-control" value="<?php echo $emp->phone; ?>" />
                         <span class="text-danger"><?php echo form_error('phone'); ?></span>
                     </div>
                 </div>
@@ -76,7 +64,7 @@
                         <label for="company" class="control-label">Department</label>
                     </div>
                     <div class="col-lg-8 col-sm-8">
-                        <input id="company" name="company" placeholder="department" type="text" class="form-control" value="<?php echo $emp->company; ?>" />
+                        <input id="company" name="company" placeholder="Department" type="text" class="form-control" value="<?php echo $emp->company; ?>" />
                         <span class="text-danger"><?php echo form_error('company'); ?></span>
                     </div>
                 </div>

@@ -12,7 +12,7 @@
                         <label for="identity" class="control-label">Username</label>
                     </div>
                     <div class="col-lg-8 col-sm-8">
-                        <input class="form-control" id="identity" name="identity" placeholder="username" type="text" value="<?php echo set_value('identity'); ?>" />
+                        <input class="form-control" id="identity" name="identity" placeholder="Email as Username" type="text" value="<?php echo set_value('identity'); ?>" />
                         <span class="text-danger"><?php echo form_error('identity'); ?></span>
                     </div>
                 </div>

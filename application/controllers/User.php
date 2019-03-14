@@ -135,7 +135,6 @@ class User extends Generic_input
         $groups = $this->ion_auth->groups()->result_array();
         $currentGroups = $this->ion_auth->get_users_groups($id)->result();
 
-        $this->form_validation->set_rules('username', 'Username', 'required');
         $this->form_validation->set_rules('first_name', 'First name', 'required');
         $this->form_validation->set_rules('last_name', 'Last name', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
