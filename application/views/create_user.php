@@ -82,7 +82,7 @@
                         <label for="password_confirm" class="control-label m">Password Confirm *</label>
                     </div>
                     <div class="col-lg-8 col-sm-8">
-                        <input id="password_confirm" name="Password confirm" placeholder="password confirm" type="text"
+                        <input id="password_confirm" name="password_confirm" placeholder="password confirm" type="text"
                                class="form-control" value="<?php echo set_value('password_confirm'); ?>"/>
                         <span class="text-danger"><?php echo form_error('password_confirm'); ?></span>
                     </div>
