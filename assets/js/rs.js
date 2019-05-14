@@ -1,15 +1,23 @@
 $(function () {
 
+
+    $("#dob").datepicker({
+        changeYear: true,
+        changeMonth: true,
+        dateFormat: "dd/mm/yyyy",
+        yearRange: "c-65:c-16"
+    });
+
     $('#emp_table').DataTable({
         "paging": true,
         searching: true,
         buttons: [
             'print', 'copy', 'excel', 'pdf'
-                    , {
-                        extend: 'colvis',
-                        postfixButtons: ['colvisRestore'],
+            , {
+                extend: 'colvis',
+                postfixButtons: ['colvisRestore'],
 
-                    }
+            }
         ]
     });
 
@@ -26,11 +34,11 @@ $(function () {
         dom: 'Bfrtip',
         buttons: [
             'print', 'copy', 'excel', 'pdf'
-                    , {
-                        extend: 'colvis',
-                        postfixButtons: ['colvisRestore'],
+            , {
+                extend: 'colvis',
+                postfixButtons: ['colvisRestore'],
 
-                    }
+            }
         ]
     });
 
@@ -46,11 +54,11 @@ $(function () {
         dom: 'Bfrtip',
         buttons: [
             'print', 'copy', 'excel', 'pdf'
-                    , {
-                        extend: 'colvis',
-                        postfixButtons: ['colvisRestore'],
+            , {
+                extend: 'colvis',
+                postfixButtons: ['colvisRestore'],
 
-                    }
+            }
         ]
     });
 
@@ -62,6 +70,17 @@ $(function () {
 
         // Toggle the visibility
         column.visible(!column.visible());
+    });
+
+    $("#potential_fixed_location_selection").hide();
+
+    $("#do_not_assign_outside_preferences").change(function () {
+        $this = $(this);
+        if ($this.val() == "NO") {
+            $("#potential_fixed_location_selection").hide();
+        } else {
+            $("#potential_fixed_location_selection").show();
+        }
     });
 
 });
@@ -85,28 +104,28 @@ function save_worker() {
         var gender = $("#gender").val();
 
         $.post($base_url + "graduate/index", {
-            graduate_no: graduate_no,
-            first_name: first_name,
-            last_name: last_name
-            ,
-            location_id: location_id,
-            worker_type_id: worker_type_id,
-            worker_level_id: worker_level_id,
-            gender: gender
-        },
-                function (status) {
-                    $("#loading").hide();
-                    if (status == 'Form Submitted Successfully....') {
-                        $("#graduate_no").val('');
-                        $("#first_name").val('');
-                        $("#last_name").val('');
-                        $("#location_id").val('');
-                        $("#worker_level_id").val('');
-                        $("#worker_type_id").val('');
-                        $("#gender").val('');
-                    }
-                    alert(status);
-                });
+                graduate_no: graduate_no,
+                first_name: first_name,
+                last_name: last_name
+                ,
+                location_id: location_id,
+                worker_type_id: worker_type_id,
+                worker_level_id: worker_level_id,
+                gender: gender
+            },
+            function (status) {
+                $("#loading").hide();
+                if (status == 'Form Submitted Successfully....') {
+                    $("#graduate_no").val('');
+                    $("#first_name").val('');
+                    $("#last_name").val('');
+                    $("#location_id").val('');
+                    $("#worker_level_id").val('');
+                    $("#worker_type_id").val('');
+                    $("#gender").val('');
+                }
+                alert(status);
+            });
     });
 }
 
@@ -212,7 +231,3 @@ function reset_worker_data() {
         window.location.href = base_url + 'index.php/setting/delete_worker_data';
     }
 }
-
-
-
-

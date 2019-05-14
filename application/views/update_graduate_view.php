@@ -145,7 +145,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" id="potential_fixed_location_selection">
                 <div class="row colbox">
                     <div class="col-lg-4 col-sm-4">
                         <label for="potential_fixed_location_id" class="control-label">Potential fixed location</label>
