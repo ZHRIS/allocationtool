@@ -128,9 +128,9 @@ class Allocation extends Generic_output
         $default_penalty_unfulfilled_demand = $this->setting_model->get_setting()->default_penalty_unfulfilled_demand;
         foreach ($list as $item) {
             if (isset($item->penalty_unfulfilled_demand)) {
-                $this->locations_model->save($item->demand_location_name, $this->get_budget_value($item->location_budget), $default_penalty_unfulfilled_demand);
+                $this->locations_model->save($item->demand_location_name, $this->get_budget_value($item->location_budget), $item->penalty_unfulfilled_demand);
             } else {
-                $this->locations_model->save($item->demand_location_name, $this->get_budget_value($item->location_budget), 40);
+                $this->locations_model->save($item->demand_location_name, $this->get_budget_value($item->location_budget), $default_penalty_unfulfilled_demand);
             }
         }
     }
