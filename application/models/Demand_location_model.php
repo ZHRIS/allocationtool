@@ -203,7 +203,11 @@ class Demand_location_model extends CI_Model
 
     function assignments_by_location()
     {
-        $query = $this->db->query("select distinct count(r.graduate_id) as 'Assigned', dl.demand_location_name as 'DemandLocation' , (select count(*)from graduate) as 'TotalWorkers', (select sum(wd.total) from worker_demand wd where wd.demand_location_id=r.demand_location_id) as 'Requested', IFNULL((select count(pr.Worker) from preferences pr WHERE pr.Weight =3 and pr.Location=dl.demand_location_name GROUP by location,r.graduate_id), 0) as 'TopPreference', IFNULL((select count(pr.Worker) from preferences pr WHERE pr.Location=dl.demand_location_name and pr.Weight >1 and pr.Worker in (select rr.graduate_id from results_x rr where rr.demand_location_id =dl.demand_location_id) GROUP by dl.demand_location_name), 0) as 'AssignedTopThreePreference', (SELECT dd.location_budget from demand_location dd where r.demand_location_id = dd.demand_location_id) as Bugdet from results_x r inner join demand_location dl on dl.demand_location_id=r.demand_location_id group by dl.demand_location_id");
+        $query = $this->db->query("select distinct count(r.graduate_id) as 'Assigned', dl.demand_location_name as 'DemandLocation', (select count(*)from graduate) as 'TotalWorkers', (select sum(wd.total) from worker_demand wd where wd.demand_location_id=r.demand_location_id) as 'Requested', 
+     IFNULL((select count(pr.Worker) from preferences pr WHERE pr.Location=dl.demand_location_name and pr.Weight =3 and pr.Worker in (select rr.graduate_id from results_x rr where rr.demand_location_id =dl.demand_location_id) GROUP by dl.demand_location_name), 0) as 'AssignedTop',
+    IFNULL((select count(pr.Worker) from preferences pr WHERE pr.Location=dl.demand_location_name and pr.Weight >1 and pr.Worker in (select rr.graduate_id from results_x rr where rr.demand_location_id =dl.demand_location_id) GROUP by dl.demand_location_name), 0) as 'AssignedTopThreePreference',
+(SELECT dd.location_budget from demand_location dd where r.demand_location_id = dd.demand_location_id) as Bugdet from results_x r inner join demand_location dl on dl.demand_location_id=r.demand_location_id group by dl.demand_location_id");
+
         return $query->result();
     }
 
