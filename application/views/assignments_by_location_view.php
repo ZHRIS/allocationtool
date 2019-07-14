@@ -23,6 +23,7 @@
             <th> % Workers Assigned to Top 3 Preferences</th>
             <th> Allocated Budget</th>
             <th> % Allocated of Total Budget</th>
+            <th> Total Number of Workers</th>
         </tr>
         </thead>
         <tbody>
@@ -43,6 +44,7 @@
                 <td><?php echo get_percentage($item->Assigned, $item->AssignedTopThreePreference) . '%' ?></td>
                 <th><?php echo $item->Bugdet; ?></th>
                 <td><?php echo get_percentage($total_allocation_budget, $item->Bugdet) . '%' ?></td>
+                <td><?php echo $item->TotalWorkers ?></td>
             </tr>
         <?php endforeach; ?>
         <tfoot>
@@ -50,7 +52,7 @@
             <th>Total</th>
             <th title="Total Assigned"> <?php echo $total_allocated_workers; ?></th>
             <th title="Total number of Requested Workers">  <?php echo $total_requested_workers; ?> </th>
-            <th title="% Assigned vs. Total Num. of Workers"> <?php echo get_percentage($total_allocated_workers, $total_number_of_workers) . '%'; ?></th>
+            <th title="% Assigned vs. Total Num. of Workers"> <?php echo get_percentage($total_number_of_workers, $total_allocated_workers) . '%'; ?></th>
             <th title="Workers Assigned to Top Preferences"> <?php echo $total_workers_assigned_to_top_preference; ?></th>
             <th title="% Workers Assigned to Top Preferences"> <?php echo get_percentage($total_allocated_workers,
                     $total_workers_assigned_to_top_preference) . ' %'; ?>

@@ -27,32 +27,34 @@ Generating totalbudgetlimit...
 Generating limitdemand...
 Generating meetdemand...
 Model has been successfully generated
-glp_mpl_build_prob: row Z; constant term -4400 ignored
+glp_mpl_build_prob: row Z; constant term -6400 ignored
 GLPK Integer Optimizer, v4.65
-525 rows, 2050 columns, 6298 non-zeros
-1940 integer variables, all of which are binary
+1343 rows, 8780 columns, 28533 non-zeros
+8620 integer variables, all of which are binary
 Preprocessing...
-221 rows, 1693 columns, 4971 non-zeros
-1667 integer variables, all of which are binary
+942 rows, 8660 columns, 25900 non-zeros
+8620 integer variables, all of which are binary
 Scaling...
- A: min|aij| =  1.000e+00  max|aij| =  1.070e+02  ratio =  1.070e+02
+ A: min|aij| =  1.000e+00  max|aij| =  6.700e+01  ratio =  6.700e+01
 GM: min|aij| =  1.000e+00  max|aij| =  1.000e+00  ratio =  1.000e+00
 EQ: min|aij| =  1.000e+00  max|aij| =  1.000e+00  ratio =  1.000e+00
 2N: min|aij| =  6.875e-01  max|aij| =  1.312e+00  ratio =  1.909e+00
 Constructing initial basis...
-Size of triangular part is 221
+Size of triangular part is 942
 Solving LP relaxation...
 GLPK Simplex Optimizer, v4.65
-221 rows, 1693 columns, 4971 non-zeros
-*     0: obj =  -1.240000000e+03 inf =   0.000e+00 (252)
-*   563: obj =   1.901146273e+02 inf =   0.000e+00 (0)
+942 rows, 8660 columns, 25900 non-zeros
+*     0: obj =  -1.600000000e+03 inf =   0.000e+00 (2353)
+Perturbing LP to avoid stalling [1017]...
+Removing LP perturbation [1922]...
+*  1922: obj =   1.766767346e+03 inf =   0.000e+00 (0)
 OPTIMAL LP SOLUTION FOUND
 Integer optimization begins...
 Long-step dual simplex will be used
-+   563: mip =     not found yet <=              +inf        (1; 0)
-+   563: >>>>>   1.901146273e+02 <=   1.901146273e+02   0.0% (1; 0)
-+   563: mip =   1.901146273e+02 <=     tree is empty   0.0% (0; 1)
++  1922: mip =     not found yet <=              +inf        (1; 0)
++  1922: >>>>>   1.766767346e+03 <=   1.766767346e+03   0.0% (1; 0)
++  1922: mip =   1.766767346e+03 <=     tree is empty   0.0% (0; 1)
 INTEGER OPTIMAL SOLUTION FOUND
-Time used:   0.0 secs
-Memory used: 3.3 Mb (3430077 bytes)
+Time used:   0.2 secs
+Memory used: 14.4 Mb (15085976 bytes)
 Model has been successfully processed
