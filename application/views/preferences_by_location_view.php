@@ -32,11 +32,11 @@
                 </td>
                 <td><?php echo $item->SelectedAsTopPreference; ?></td>
                 <td>
-                    <?php echo get_percentage($item->TotalTopPreferences, $item->SelectedAsTopPreference) . '%' ?>
+                    <?php echo get_percentage($item->SelectedAsTopPreference, $item->TotalTopPreferences) . '%' ?>
                 </td>
                 <td><?php echo $item->SelectedMoreThanOnce; ?></td>
                 <td>
-                    <?php echo get_percentage($item->Selected, $item->SelectedMoreThanOnce) . '%' ?>
+                    <?php echo get_percentage($item->TotalNumberOfPreferences, $item->SelectedMoreThanOnce) . '%' ?>
                 </td>
             </tr>
         <?php endforeach; ?>

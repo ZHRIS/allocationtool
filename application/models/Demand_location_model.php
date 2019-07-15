@@ -191,13 +191,13 @@ class Demand_location_model extends CI_Model
 
     function preferences_met_by_location()
     {
-        $query = $this->db->query("select dl.demand_location_name as DemandLocation, count(*) as Selected, (select count(*) from preference) as TotalNumberOfPreferences,
-  (select count(*) from preferences pp where pp.Location = dl.demand_location_name and Weight=3) as SelectedAsTopPreference,
-  (select count(*) from preferences pp where Weight=3) as TotalTopPreferences,
-  (select count(*) from preferences pp where pp.Location = dl.demand_location_name and Weight>0)
-  as SelectedMoreThanOnce from preference p
-  INNER JOIN demand_location dl on dl.demand_location_id = p.demand_location_id GROUP BY dl.demand_location_id
-");
+        $query = $this->db->query("select pp.location as DemandLocation,  
+ (select count(*) FROM preferences) as TotalNumberOfPreferences, 
+ (select count(location) FROM preferences WHERE location = pp.location) as Selected, 
+ (select count(location) FROM preferences WHERE location =pp.location and Weight =3 GROUP by pp.Location) as TotalTopPreferences,
+(select count(location) FROM preferences WHERE location =pp.location and Weight <3 GROUP by pp.Location) as SelectedAsTopPreference,
+(select count(location) FROM preferences WHERE location =pp.location GROUP by pp.Location) as SelectedMoreThanOnce
+FROM preferences pp GROUP by pp.Location");
         return $query->result();
     }
 
