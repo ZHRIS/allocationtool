@@ -72,7 +72,7 @@ class Allocation extends Generic_output
     {
         $this->breadcrumbs->push('Allocation Results', 'allocation');
         $this->breadcrumbs->push('Assignments by Worker Types', '/');
-        $data['assignments_by_worker_types'] = $this->demand_location_model->assignments_by_worker_types();;
+        $data['assignments_by_worker_types'] = $this->demand_location_model->assignments_by_worker_types();
         $this->load->view('assignments_by_worker_types_view', $data);
         $this->load->view('footer');
     }

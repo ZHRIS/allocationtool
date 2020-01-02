@@ -213,12 +213,10 @@ FROM preferences pp GROUP by pp.Location");
 
     function assignments_by_worker_types()
     {
-        $query = $this->db->query("select count(r.graduate_id) as 'Assigned',w.worker_type_name as 'WorkerType',
-(select sum(wd.total) from worker_demand wd where g.worker_type_id=wd.worker_type_id) as 'Requested',
-(select count(g1.graduate_id) from graduate g1 where g1.worker_type_id=g.worker_type_id) as 'TotalWorkers'
-from results_x r
-inner join graduate g on g.graduate_id=r.graduate_id inner join worker_type w on g.worker_type_id=w.worker_type_id group by g.worker_type_id
-");
+        $query = $this->db->query("select w.worker_type_name as 'WorkerType', (select sum(wd.total) from worker_demand wd where w.worker_type_id=wd.worker_type_id) as 'Requested',
+(select count(g.graduate_id) from graduate g where w.worker_type_id=g.worker_type_id) as 'TotalWorkers',
+(select count(r.graduate_id) from results_x r join graduate g1 on g1.graduate_id=r.graduate_id where g1.worker_type_id = w.worker_type_id) as 'Assigned'
+from worker_type w order by w.worker_type_name desc");
         return $query->result();
     }
 
