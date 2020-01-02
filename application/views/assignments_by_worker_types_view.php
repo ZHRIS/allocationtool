@@ -30,10 +30,11 @@
                 <td><?php echo $item->Assigned; ?></td>
                 <td><?php echo($item->TotalWorkers - $item->Assigned); ?></td>
                 <td><?php
-                    if (($item->Requested - $item->TotalWorkers) >= 0)
-                        echo(($item->Requested - $item->TotalWorkers));
-                    else
-                        echo(0);
+                        if( ($item->Requested - $item->TotalWorkers) < 0) {
+                            echo((($item->Requested - $item->TotalWorkers) * -1));
+                        }else{
+                            echo(($item->Requested - $item->TotalWorkers));
+                       }
                     ?></td>
                 <td><?php
 
