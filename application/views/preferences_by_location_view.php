@@ -2,7 +2,6 @@
     <?php echo $this->breadcrumbs->show(); ?>
 </div>
 <?php $total_number_of_times_selected = 0 ?>
-<?php $total_top_choice = 0 ?>
 <?php $total_top_selection = 0 ?>
 
 <div class="row">
@@ -22,7 +21,6 @@
         <tbody>
         <?php foreach ($preferences_by_location as $item): ?>
             <?php $total_number_of_times_selected = $item->Selected + $total_number_of_times_selected; ?>
-            <?php $total_top_choice = $item->SelectedAsTopPreference + $total_top_choice; ?>
             <?php $total_top_selection = $item->SelectedMoreThanOnce + $total_top_selection; ?>
             <tr>
                 <td><?php echo $item->DemandLocation; ?></td>
@@ -32,7 +30,7 @@
                 </td>
                 <td><?php echo $item->SelectedAsTopPreference; ?></td>
                 <td>
-                    <?php echo get_percentage($item->SelectedAsTopPreference, $item->TotalTopPreferences) . '%' ?>
+                    <?php echo get_percentage($total_top_choice, $item->SelectedAsTopPreference) . '%' ?>
                 </td>
                 <td><?php echo $item->SelectedMoreThanOnce; ?></td>
                 <td>

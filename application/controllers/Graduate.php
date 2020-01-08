@@ -50,7 +50,8 @@ class Graduate extends Generic_home
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('graduate_view', $data);
         } else {
-            $graduateNo = $graduateNo = $this->input->post('graduate_no');
+
+            $graduateNo = $this->input->post('graduate_no');
 
             if ($this->graduate_model->check_duplicate($graduateNo)) {
                 $this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Duplicate Graduate Number!</div>');

@@ -93,6 +93,13 @@ class Allocation extends Generic_output
         $this->breadcrumbs->push('Allocation Results', 'allocation');
         $this->breadcrumbs->push('Preferences by Location', '/');
         $data['preferences_by_location'] = $this->demand_location_model->preferences_met_by_location();
+
+        $total_top_choice = 0;
+        foreach ($this->demand_location_model->preferences_met_by_location() as $item) {
+            $total_top_choice = $item->SelectedAsTopPreference + $total_top_choice;
+        }
+
+        $data['total_top_choice'] = $total_top_choice;
         $this->load->view('preferences_by_location_view', $data);
         $this->load->view('footer');
     }
